@@ -10,12 +10,12 @@
   ## Upstream에서 오픈스택을 개발하는 방법
   ### Devstack
     오픈스택 환경을 쉽게 구성해주는 도구로 오픈스택 개발자들의 개발 환경/테스트 환경으로 주로 쓰인다.  
-    [Devstack]:https://docs.openstack.org/devstack/latest/  
+    [Devstack](https://docs.openstack.org/devstack/latest/)  
    ### 코드 리뷰
     오픈스택은 코드 리뷰로 Gerrit을 사용하며 CI도구로 ZuuL을 사용하고 있다.  
     Core Contributor의 +2점수를 받으면 머지가 가능하다.  
     ![image](https://user-images.githubusercontent.com/86049096/169687579-499152d9-087d-4248-bf73-f709f646e4f8.png)  
-    [Gerrit]:https://review.opendev.org  
+    [Gerrit](https://review.opendev.org)  
    ### 이슈 관리
     ubuntu에서 사용하는 launchpad를 사용하여 관리하다가 최근에 storyboard로 이전중이다.  
     ![image](https://user-images.githubusercontent.com/86049096/169687604-9c3a2288-1659-4953-a57c-cd7226eedcb2.png)
