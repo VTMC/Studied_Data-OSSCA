@@ -42,3 +42,113 @@ IRC의 지난 내용도 모두 기록하며 누구나 논의 기록을 되돌아
 네트워크를 누르면 연결되어 있는 상태를 볼 수 있다.<br>
 ![image](https://user-images.githubusercontent.com/86049096/169688619-aba5ec61-fb6e-4ae8-8093-8a3ee44f4518.png)<br>
 ## 오픈스택 코드 분석
+코드 분석을 위한 환경구성은 아래 URL을 참고한다.<br>
+[참조]:https://docs.google.com/document/d/19j2D0ttj9U9mR5Z-O6kEb6xFlaslQJIkph8XtBI-AGY/edit?usp=sharing <br>
+### serverlist에 created추가하기
+### configuration show --mask의 버그 고치기
+  매개변수에 configuration show를 넣고 실행하면 다음과 같은 화면이 나온다.<br>
+  ```
+  +---------------------------------------------+-------------------------------+  
+  | Field                                       | Value                         |  
+  +---------------------------------------------+-------------------------------+  
+  | additional_user_agent                       | [('osc-lib', '2.6.0')]        |  
+  | api_timeout                                 | None                          |  
+  | auth.project_domain_id                      | default                       |  
+  | auth.project_name                           | demo                          |  
+  | auth.user_domain_id                         | default                       |  
+  | auth_type                                   | password                      |  
+  | auth_url                                    | http://211.42.154.85/identity |  
+  | baremetal_introspection_status_code_retries | 5                             |  
+  | baremetal_status_code_retries               | 5                             |  
+  | beta_command                                | False                         |  
+  | cacert                                      | None                          |  
+  | cert                                        | None                          |  
+  | default_domain                              | default                       |  
+  | deferred_help                               | False                         |  
+  | disable_vendor_agent                        | {}                            |  
+  | floating_ip_source                          | neutron                       |  
+  | identity_api_version                        | 3                             |  
+  | image_api_use_tasks                         | False                         |  
+  | image_format                                | qcow2                         |  
+  | image_status_code_retries                   | 5                             |  
+  | interface                                   | public                        |  
+  | key                                         | None                          |  
+  | message                                     |                               |  
+  | network_api_version                         | 2                             |  
+  | networks                                    | []                            |  
+  | object_store_api_version                    | 1                             |  
+  | password                                    | secret                        |  
+  | region_name                                 | RegionOne                     |  
+  | secgroup_source                             | neutron                       |  
+  | status                                      | active                        |  
+  | timing                                      | False                         |  
+  | username                                    | admin                         |  
+  | verbose_level                               | 1                             |  
+  | verify                                      | True                          |  
+  | volume_api_version                          | 3                             |  
+  +---------------------------------------------+-------------------------------+  
+  ```
+  출력화면을 보면 password가 secret이라고 적혀있는데 원래는 <redated>라고 마스킹되어 출력되어야 하는 항목이다.<br>
+  따라서 현재 프로그램의 마스킹하는 부분에 버그가 있어 제대로 역할을 수행하지 못하는 모습이다.<br>
+  코드를 따라가면 python-openstackclient\setup.cfg파일의 42행~53행에서 configuration show가 openstackclient.common의 configuration을 호출하는 모습을 볼 수 있다.<br>
+  ```
+  configuration_show = openstackclient.common.configuration:ShowConfiguration
+  ```
+  configuration.py파일의 21행에 REDACTED는 마스킹이 되었을 경우 변수를,
+  ```
+  REDACTED = "<redacted>"
+  ```
+  52행의 secret_opts는 마스킹이 되어야하는 항목을 나타낸다.
+  ```
+  secret_opts = ["password", "token"]
+  ```
+  configuration show 다음으로 위치하는 부분에 --unmask가 올 경우에는 parsed_arg.mask가 0이 되는 것으로 1이 되는 경우에 마스킹을 한다고 유추할 수 있다.<br>
+  따라서 마스킹을 하는 역할을 하는 코드를 다음과 같이 추가할 수 있다.<br>
+  ```
+  if parsed_args.mask:
+    for secret_opt in secret_opts:
+        if secret_opt in info:
+            info[secret_opt] = REDACTED
+  ```
+  이후 매개변수에 configuration show나 configuration show --unmask를 넣은 후 실행하면 정상적으로 수행하는 모습을 볼 수 있다.<br>
+  ```
++---------------------------------------------+-------------------------------+
+| Field                                       | Value                         |
++---------------------------------------------+-------------------------------+
+| additional_user_agent                       | [('osc-lib', '2.6.0')]        |
+| api_timeout                                 | None                          |
+| auth.project_domain_id                      | default                       |
+| auth.project_name                           | demo                          |
+| auth.user_domain_id                         | default                       |
+| auth_type                                   | password                      |
+| auth_url                                    | http://211.42.154.85/identity |
+| baremetal_introspection_status_code_retries | 5                             |
+| baremetal_status_code_retries               | 5                             |
+| beta_command                                | False                         |
+| cacert                                      | None                          |
+| cert                                        | None                          |
+| default_domain                              | default                       |
+| deferred_help                               | False                         |
+| disable_vendor_agent                        | {}                            |
+| floating_ip_source                          | neutron                       |
+| identity_api_version                        | 3                             |
+| image_api_use_tasks                         | False                         |
+| image_format                                | qcow2                         |
+| image_status_code_retries                   | 5                             |
+| interface                                   | public                        |
+| key                                         | None                          |
+| message                                     |                               |
+| network_api_version                         | 2                             |
+| networks                                    | []                            |
+| object_store_api_version                    | 1                             |
+| password                                    | <redacted>                    |
+| region_name                                 | RegionOne                     |
+| secgroup_source                             | neutron                       |
+| status                                      | active                        |
+| timing                                      | False                         |
+| username                                    | admin                         |
+| verbose_level                               | 1                             |
+| verify                                      | True                          |
+| volume_api_version                          | 3                             |
++---------------------------------------------+-------------------------------+
+  ```
