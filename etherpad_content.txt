@@ -1,0 +1,133 @@
+2021년 기고 아카데미 오픈스택 팀 블로그 : https://openstack-kr-contribution-academy-2021.readthedocs.io/ko/latest
+
+강의 자료
+오픈스택 소개
+https://docs.google.com/presentation/d/1N4sV1OuMD83VLMQfsVW45eEoWCT5OJQTFVj1qyX9ciQ/edit?usp=sharing
+
+Pycharm - windows
+https://docs.google.com/document/d/19j2D0ttj9U9mR5Z-O6kEb6xFlaslQJIkph8XtBI-AGY/edit?usp=sharing
+
+Pycharm - mac
+https://docs.google.com/document/d/1nOLMCDIH1lIuv499OCpXZXpb8GjoxBGfGwdVFVxmzJY/edit?usp=sharing
+
+OpenStack 계정 생성
+https://docs.openstack.org/contributors/ko_KR/common/accounts.html
+
+Gerrit 구성하기
+https://docs.openstack.org/contributors/ko_KR/common/setup-gerrit.html
+
+
+서버 목록
+김선민 : 211.42.154.98
+안선영 : 211.42.154.70
+이선재 : 211.42.154.83
+이제일 : 211.42.154.84
+전지훈 : 211.42.154.85
+허태훈 : 211.42.154.56
+
+접속 키
+pem key ( for windows ) : https://drive.google.com/file/d/1MVGXg-ze-pCJCrDaQBjdoLiS39bNOAaM/view?usp=sharing
+pem key (for linux , mac) : https://drive.google.com/file/d/16RGKRTdw-Gz33AEhlzdgFdKj7b7Obv92/view?usp=sharing
+
+접속 방법
+계정 : ubuntu
+ssh -i devstack.cer ubuntu@IP
+
+Devstack 설치하기
+아래 명령어를 차례대로 실행하기
+sudo apt update
+sudo useradd -s /bin/bash -d /opt/stack -m stack
+echo "stack ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/stack
+sudo chown stack:stack -R /opt/stack
+sudo -u stack -i
+
+git clone https://opendev.org/openstack/devstack
+cd devstack
+git checkout stable/yoga
+
+/opt/stack/devstack/local.conf 파일 생성하기
+
+[[local|localrc]]
+HOST_IP=(자신의 서버 공인 IP)
+FORCE=yes
+ADMIN_PASSWORD=secret
+DATABASE_PASSWORD=$ADMIN_PASSWORD
+RABBIT_PASSWORD=$ADMIN_PASSWORD
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+
+disable_service etcd3
+
+## Neutron options
+Q_USE_SECGROUP=True
+FLOATING_RANGE="192.168.100.0/24"
+IPV4_ADDRS_SAFE_TO_USE="10.0.0.0/22"
+Q_FLOATING_ALLOCATION_POOL=start=192.168.100.50,end=192.168.100.250
+PUBLIC_NETWORK_GATEWAY="192.168.100.1"
+PUBLIC_INTERFACE=mybr0
+
+# Open vSwitch provider networking configuration
+Q_USE_PROVIDERNET_FOR_PUBLIC=True
+OVS_PHYSICAL_BRIDGE=br-ex
+PUBLIC_BRIDGE=br-ex
+OVS_BRIDGE_MAPPINGS=public:br-ex
+
+devstack 실행하기
+./stack.sh
+
+
+sandbox project : https://opendev.org/opendev/sandbox
+
+
+
+git commit -m "This is test commit"
+git review 
+
+
+
+
+~/devstack
+source openrc admin demo
+
+
+
+novaclient source code
+https://opendev.org/openstack/python-novaclient/src/branch/stable/yoga/novaclient/v2/shell.py#L4036
+
+
+
+
+imgae create 에러 메시지
+openstack.exceptions.BadRequestException: BadRequestException: 400: Client Error for url: http://192.168.122.99/image/v2/images, 400 Bad Request: Provided object does not match schema 'image': 'False' is not of type 'boolean': {'description': 'If true, image will not be deletable.',: 'type': 'boolean'}: 'False': Failed validating 'type' in schema['properties']['protected']:: On instance['protected']:
+clean_up CreateImage: BadRequestException: 400: Client Error for url: http://192.168.122.99/image/v2/images, 400 Bad Request: Provided object does not match schema 'image': 'False' is not of type 'boolean': {'description': 'If true, image will not be deletable.',: 'type': 'boolean'}: 'False': Failed validating 'type' in schema['properties']['protected']:: On instance['protected']:
+END return value: 1
+
+
+4명
+openstack configuration show --mask 에서 마스킹이 되도록 해주세요
+
+
+안선영님
+https://opendev.org/openstack/contributor-guide
+위 repo clone 받아주세요
+https://docs.openstack.org/contributors/common/irc.html#set-up-irc-on-mac-os
+이 부분이 코드의 어느 부분인지 찾아봅니다. 
+-> contributor-guide/doc/source/common/irc.rst
+그리고 macos에서 irc 클라이언트를 설치할 수 있는 방법을 조사해주세요.
+-> limeChat 
+contributor-guide 도 pycharm 으로 열어서  .venv 라는 이름으로 virtualenv를 만들어주세요.
+그리고 source .venv/bin/activate 를 한 다음 tox -e docs 를 해보시면 됩니다.
+rst문법을 공부해야합니다.
+
+자세한 내용은 contributor-guide 저장소의 README를 읽어주세요 . 
+
+
+
+온라인 : https://meet.google.com/bji-hoys-rxo
+
+
+
+오픈스택의 인증 : https://docs.openstack.org/python-openstackclient/latest/cli/authentication.html
+https://docs.openstack.org/python-openstackclient/pike/configuration/index.html
+
+gerrit 커밋 
+https://review.opendev.org/c/openstack/contributor-guide/+/842849
