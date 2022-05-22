@@ -10,15 +10,19 @@
   # Upstream에서 오픈스택을 개발하는 방법
   **Devstack**  
     오픈스택 환경을 쉽게 구성해주는 도구로 오픈스택 개발자들의 개발 환경/테스트 환경으로 주로 쓰인다.  
-    참조-https://docs.openstack.org/devstack/latest/  
+    Devstack-https://docs.openstack.org/devstack/latest/  
    **코드 리뷰**  
     오픈스택은 코드 리뷰로 Gerrit을 사용하며 CI도구로 ZuuL을 사용하고 있다.  
     Core Contributor의 +2점수를 받으면 머지가 가능하다.  
+    ![image](https://user-images.githubusercontent.com/86049096/169687579-499152d9-087d-4248-bf73-f709f646e4f8.png)  
     Gerrit-https://review.opendev.org  
    **이슈 관리**  
     ubuntu에서 사용하는 launchpad를 사용하여 관리하다가 최근에 storyboard로 이전중이다.  
+    ![image](https://user-images.githubusercontent.com/86049096/169687604-9c3a2288-1659-4953-a57c-cd7226eedcb2.png)
+    ![image](https://user-images.githubusercontent.com/86049096/169687614-722270b0-3e93-4745-a041-288d3afcb451.png)  
    **회의록 / 의견 공유**  
     오픈스택 커뮤니티에서 논의되는 모든 내용은 etherpad에 기록하고 공개한다.  
+    ![image](https://user-images.githubusercontent.com/86049096/169687621-e5af6d0e-919c-4527-a93f-29f9d593e181.png)  
    **PTG(Project Team Gathering)**  
     6개월마다 오픈스택 개발자들이 팀별로 모여 다음 릴리즈에 포함될 안건을 논의하는 기간이다.  
     ![image](https://user-images.githubusercontent.com/86049096/169686678-c6bf5ca1-1dfd-4a84-a08b-10a3f5540bb8.png)  
