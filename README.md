@@ -45,6 +45,7 @@ IRC의 지난 내용도 모두 기록하며 누구나 논의 기록을 되돌아
 코드 분석을 위한 환경구성은 아래 URL을 참고한다.<br>
 [참조]:https://docs.google.com/document/d/19j2D0ttj9U9mR5Z-O6kEb6xFlaslQJIkph8XtBI-AGY/edit?usp=sharing <br>
 ### serverlist에 created추가하기
+python-openstackclient의 setup.cfg파일에는 명령어에 따른 호출 함수들이 적혀있는데 109행을 보면 
 ### configuration show --mask의 버그 고치기
   매개변수에 configuration show를 넣고 실행하면 다음과 같은 화면이 나온다.<br>
   ```
