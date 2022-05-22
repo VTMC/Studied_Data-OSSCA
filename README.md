@@ -32,3 +32,13 @@ ubuntu에서 사용하는 launchpad를 사용하여 관리하다가 최근에 st
 OpenStack-discuss Mailing List를 통해 오픈스택의 모든 내용을 공유하고 기록한다.<br>
 IRC의 지난 내용도 모두 기록하며 누구나 논의 기록을 되돌아 볼 수 있다.<br>
 ![image](https://user-images.githubusercontent.com/86049096/169686741-c95e62ab-6bfb-48a3-994f-3898d68191dd.png)
+## 오픈스택 실습
+아이피를 받아 오픈스택에 로그인한다.<br>
+![image](https://user-images.githubusercontent.com/86049096/169688377-b000947e-f533-45cc-872c-3206f0e0e1d0.png)<br>
+로그인하면 사용하고 있는 인스턴스의 개요를 보여주는 페이지가 나온다.<br>
+![image](https://user-images.githubusercontent.com/86049096/169688465-97a82dfa-2786-4741-b279-6ac0dccf1b2b.png)<br>
+인스턴스를 누르면 사용하고 있는 인스턴스들의 자세한 정보가 나타난다.<br>
+![image](https://user-images.githubusercontent.com/86049096/169688550-2c25d1e3-aea2-4d78-bb66-c6d4a539407d.png)<br>
+네트워크를 누르면 연결되어 있는 상태를 볼 수 있다.<br>
+![image](https://user-images.githubusercontent.com/86049096/169688619-aba5ec61-fb6e-4ae8-8093-8a3ee44f4518.png)<br>
+## 오픈스택 코드 분석
