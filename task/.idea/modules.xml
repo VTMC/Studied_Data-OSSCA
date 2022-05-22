@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/openstacksdk/.idea/openstacksdk.iml" filepath="$PROJECT_DIR$/openstacksdk/.idea/openstacksdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/osc-lib/.idea/osc-lib.iml" filepath="$PROJECT_DIR$/osc-lib/.idea/osc-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/python-openstackclient/.idea/python-openstackclient.iml" filepath="$PROJECT_DIR$/python-openstackclient/.idea/python-openstackclient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/task.iml" filepath="$PROJECT_DIR$/.idea/task.iml" />
+    </modules>
+  </component>
+</project>
