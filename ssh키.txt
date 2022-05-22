@@ -1,0 +1,11 @@
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQD73bj6DvPvk7LEkTP/IcIQU6LWKB4TeAXcPXT05TkT3ETHsL/kbzZPsmpi6q60xoxqvdo61JNbLmaInWMrWMSUDEQosuc2tNuPBLKXRrUTlYZ81yy70KBXNeCgwd8NnKJRqJxoT3qlSXIvJ0kHWxVguH46kPL32MvYz+ucXFkvFQpX2mrMzwaRSXvarYHfQI4tOTo2IjJQifX+oMDBYenvMnvBF/YZ3gXXFWq49CDIpu+fBCArGvLfZ+qGAz3Pv3JjKot9pz/90ndSj5XTPZU0zrlbvViQfGfGpsGGOET24VGATD/qDoPHQxxm1aZiC9rEsVyp0YcI64IxzpcDEpz+TRTbBH0FIIA66Pfp/Gy34byRtMuGLKpJQr/9ysSy1tRPwUS4lUWDXkh9hl/Jlc1ce6XFDk9VeCA1Re0KSoFGOccUrtKbXtU60SuCwdLXIqfUvYoxBIkZIXh+24SUcQ5WOKuhIXacP+qOj44MCOf2OE90aJBUZOwM5G57WKB8MeE= stack@devstack-05
+
+
+Host review.opendev.org review
+  Hostname review.opendev.org
+  Port 29418
+  User jihun-chun
+  IdentityFile ~/.ssh/id_openstack_ed25519
+
+
+https://etherpad.opendev.org/p/2022-chuncheon-sprint-korea
